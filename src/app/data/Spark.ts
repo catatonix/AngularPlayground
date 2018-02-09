@@ -1,6 +1,5 @@
 import firebase = require('firebase/app');
 import "firebase/database";
-import FirebaseConfig from './FirebaseConfig';
 
 import { Injectable } from '@angular/core';
 
