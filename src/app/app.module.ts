@@ -6,6 +6,12 @@ import { MaterialModule } from './shared/material.module';
 import { AppComponent } from './app.component';
 import Spark from './data/Spark';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router/src/router_module';
+
+const routes: Routes = [
+  { path: 'demo', loadChildren: './dmeo/demo.module#DemoMoudle' },
+  { path: '**', redirectTo: 'demo' }
+];
 
 @NgModule({
   declarations: [
@@ -15,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [Spark],
   bootstrap: [AppComponent]
