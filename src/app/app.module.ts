@@ -5,6 +5,7 @@ import { MaterialModule } from './shared/material.module';
 
 import { AppComponent } from './app.component';
 import Spark from './data/Spark';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import Spark from './data/Spark';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [Spark],
   bootstrap: [AppComponent]
