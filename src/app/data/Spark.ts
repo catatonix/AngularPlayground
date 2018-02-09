@@ -45,7 +45,7 @@ export default class Spark{
     }
 
     getNewKey(): string{
-        let key = this.db.ref('').push('-').key;
+        let key = this.db.ref('/').push('-').key;
         this.db.ref(key).remove();
         return key;
     }
