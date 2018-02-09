@@ -27,7 +27,6 @@ export default class Spark {
     private db: firebase.database.Database;
 
     constructor() {
-        let config = new FirebaseConfig().get();
         let app: firebase.app.App = firebase.initializeApp(firebaseConfig);
         this.db = app.database();
     }
