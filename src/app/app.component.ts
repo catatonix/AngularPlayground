@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import Spark from './data/Spark';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,9 +11,16 @@ export class AppComponent {
   title = 'app';
 
   constructor(private spark: Spark) {
-    spark.write('/', '-');
-    spark.read('/').then(e => {
-      console.log(e);
-    });
+    this.turnOn();
   }
+
+  turnOff(){
+    this.spark.write('test', 'off');
+  }
+  turnOn(){
+    this.spark.write('test', 'on');
+  }
+
+
+
 }
