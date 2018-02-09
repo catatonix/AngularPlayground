@@ -1,15 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './shared/material.module';
 
 import { AppComponent } from './app.component';
-import Spark from './data/Spark';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router/src/router_module';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'demo', loadChildren: './dmeo/demo.module#DemoMoudle' },
+  { path: 'demo', loadChildren: './demo/demo.module#DemoModule' },
   { path: '**', redirectTo: 'demo' }
 ];
 
@@ -20,11 +17,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    RouterModule
+    RouterModule.forRoot(routes)
   ],
-  providers: [Spark],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

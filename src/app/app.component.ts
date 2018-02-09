@@ -9,18 +9,4 @@ import Spark from './data/Spark';
 })
 export class AppComponent {
   title = 'app';
-
-  constructor(private spark: Spark) {
-    this.turnOn();
-  }
-
-  turnOff(){
-    this.spark.write('test', 'off');
-  }
-  turnOn(){
-    this.spark.write('test', 'on');
-  }
-
-
-
 }
