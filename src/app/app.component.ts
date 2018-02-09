@@ -9,7 +9,10 @@ import Spark from './data/Spark';
 export class AppComponent {
   title = 'app';
 
-  constructor(private spark: Spark){
-    console.log(spark.getNewKey());
+  constructor(private spark: Spark) {
+    spark.write('/', '-');
+    spark.read('/').then(e => {
+      console.log(e);
+    });
   }
 }
