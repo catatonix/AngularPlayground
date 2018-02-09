@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import Spark from './data/Spark';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private spark: Spark){
+    console.log(spark.getNewKey());
+  }
 }
