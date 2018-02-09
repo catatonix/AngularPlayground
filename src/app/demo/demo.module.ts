@@ -6,6 +6,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 
 import Spark from '../data/Spark';
 import { MaterialModule } from '../shared/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FlexboxComponent } from './flexbox/flexbox.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FlexboxComponent } from './flexbox/flexbox.component';
     CommonModule,
     DemoRoutingModule,
     MaterialModule,
+    FlexLayoutModule,
     DemoRoutingModule
   ],
   declarations: [ButtonsComponent, FlexboxComponent],
