@@ -11,6 +11,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import Spark from '../data/Spark';
+import UserService from './services/UserService';
 
 const routes: Routes = [
   { path: '', component: ContactmanagerAppComponent,
@@ -29,6 +30,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent],
-  providers: [Spark]
+  providers: [UserService, Spark]
 })
 export class ContactmanagerModule { }

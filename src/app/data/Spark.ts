@@ -43,7 +43,12 @@ export default class Spark {
         this.db.ref(path).set(data);
     }
 
-    getAsArray(path: string): Promise<Array<Object>> {
+    delete(path: string){
+        //#todo return whether success or not
+        this.write(path, {});
+    }
+
+    getAsArray(path: string): Promise<Object[]> {
         //#todo handle checking for nonexistent node
         return this.read(path).then(data => {
             return Object.values(data);
@@ -55,6 +60,12 @@ export default class Spark {
         let key = this.db.ref('/').push('-').key;
         this.db.ref(key).remove();
         return key;
+    }
+
+    subscribe(path: string, callback: Function){
+        this.db.ref(path).on('value', snap => {
+            callback(snap.val());
+        });
     }
 
     getRef(path: string): Object {
