@@ -25,7 +25,7 @@ export default class UserService {
         // });
         this.spark.subscribe(this.path, data => {
             this.dataStore.users = <User[]>data;
-            this._users.next(Object.assign({}, this.dataStore).users);
+            this._users.next(Object.values(Object.assign({}, this.dataStore).users));
         });
     }
 
