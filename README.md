@@ -1,3 +1,7 @@
+> Dev notes:
+  project to demonstrate angular material designs plugin
+  contains in porgress spark firebase service
+
 # AngularMaterial
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
