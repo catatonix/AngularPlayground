@@ -33,23 +33,42 @@ export default class Spark {
         this.db = app.database();
     }
 
+    /**
+     * Get object at location in firebase database
+     * @param path location of object to get
+     * @returns promise of object
+     */
     read(path: string): Promise<Object> {
-        //#todo handle invalid read
+        //#todo handle invalid readqwq
         return this.db.ref(path).once('value').then(snap => {
             return snap.val();
         });
     }
 
+    /**
+     * Write object at location in firebase database
+     * @param path location at which to write the data
+     * @param data object to be uploaded
+     */
     write(path: string, data: Object) {
         //#todo return whether success or not
         this.db.ref(path).set(data);
     }
 
+    /**
+     * Delete object at location in firebase database
+     * @param path location at which to delete the data
+     */
     delete(path: string){
         //#todo return whether success or not
         this.write(path, {});
     }
 
+    /**
+     * Get children of object at loction as an array
+     * @param path location which should have children read
+     * @returns promise of array of objects
+     */
     readAsArray(path: string): Promise<Object[]> {
         //#todo handle checking for nonexistent node
         return this.read(path).then(data => {
@@ -58,18 +77,43 @@ export default class Spark {
         });
     }
 
+    /**
+     * Set a callback function to run when data updates at location
+     * @param path location of data to listen to
+     * @param callback function to be run when data changes
+     */
     subscribe(path: string, callback: Function){
         this.db.ref(path).on('value', snap => {
             callback(snap.val());
         });
     }
 
+    /**
+     * Subscribes to an array of children of object at location
+     * @param path parent of children to listen to
+     * @param callback function to be run when data changes
+     */
+    subscribeToArray(path: string, callback: Function){
+        this.db.ref(path).on('value', snap => {
+            callback(Object.values(snap.val()));
+        });
+    }
+
+    /**
+     * Generates a new unique GUID with firebase
+     * @returns new GUID as string
+     */
     getNewKey(): string {
         let key = this.db.ref('/').push('-').key;
         this.db.ref(key).remove();
         return key;
     }
 
+    /**
+     * Gets the firebase reference at a specific location
+     * @param path location at which to get the reference
+     * @returns firebase reference as Object
+     */
     getRef(path: string): Object {
         return this.db.ref(path);
     }
