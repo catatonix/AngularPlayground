@@ -1,0 +1,24 @@
+/* check out: tburleson-layouts-demos.firebaseapp.com/#/docs */
+
+.flex-container {
+    display: flex;
+    // flex-flow: row wrap; // does the same as the two following lines:
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    @media all and (max-width: 800px){
+        justify-content: flex-start;
+    }
+}
+
+.flex-item{
+    width: 200px;
+    $height: 150px;
+    background: tomato;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+    line-height: $height;
+    height: $height;
+}
