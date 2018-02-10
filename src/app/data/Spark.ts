@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 /**
  * Class to interact with the firebase database
  * 
+ * author: Michael Fitzhavey
+ * 
  * ReadMe:
  *  - Requires npm install --save firebase
  *  - Setup below
@@ -48,7 +50,7 @@ export default class Spark {
         this.write(path, {});
     }
 
-    getAsArray(path: string): Promise<Object[]> {
+    readAsArray(path: string): Promise<Object[]> {
         //#todo handle checking for nonexistent node
         return this.read(path).then(data => {
             return Object.values(data);
@@ -56,16 +58,16 @@ export default class Spark {
         });
     }
 
-    getNewKey(): string {
-        let key = this.db.ref('/').push('-').key;
-        this.db.ref(key).remove();
-        return key;
-    }
-
     subscribe(path: string, callback: Function){
         this.db.ref(path).on('value', snap => {
             callback(snap.val());
         });
+    }
+
+    getNewKey(): string {
+        let key = this.db.ref('/').push('-').key;
+        this.db.ref(key).remove();
+        return key;
     }
 
     getRef(path: string): Object {
