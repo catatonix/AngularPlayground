@@ -13,8 +13,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ContactmanagerAppComponent implements OnInit {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    console.log(iconRegistry);
-    console.log(sanitizer);
     iconRegistry.addSvgIconSet(
       sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg')
     );

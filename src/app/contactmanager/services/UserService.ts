@@ -29,6 +29,10 @@ export default class UserService {
         });
     }
 
+    userById(id: number){
+        return this.dataStore.users.find(x => x.id == id);
+    }
+
     get users(): Observable<User[]>{
         return this._users.asObservable();
     }
