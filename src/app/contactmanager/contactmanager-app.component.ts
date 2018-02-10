@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import Spark from '../data/Spark';
 
 @Component({
   selector: 'app-contactmanager-app',
@@ -10,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactmanagerAppComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
