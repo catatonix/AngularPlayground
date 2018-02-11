@@ -46,6 +46,12 @@ export default class UserService {
         return this.dataStore.users.find(x => x.id == id);
     }
 
+    addUser(user: User): Promise<User>{
+        return this.spark.push(this.path, user).then(usr => {
+            return user;
+        });
+    }
+
     get users(): Observable<User[]>{
         return this._users.asObservable();
     }

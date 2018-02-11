@@ -12,6 +12,9 @@ import { Injectable } from '@angular/core';
  * ReadMe:
  *  - Requires npm install --save firebase
  *  - Setup below
+ * 
+ * ToDo:
+ *  - check promise validation works on fail
  */
 
 var firebaseConfig = {
@@ -39,7 +42,6 @@ export default class Spark {
      * @returns promise of object
      */
     read(path: string): Promise<Object> {
-        //#todo handle invalid readqwq
         return this.db.ref(path).once('value').then(snap => {
             return snap.val();
         });
@@ -49,19 +51,48 @@ export default class Spark {
      * Write object at location in firebase database
      * @param path location at which to write the data
      * @param data object to be uploaded
+     * @returns a Promise of the uploaded object that will be resolved when upload completes
      */
-    write(path: string, data: Object) {
-        //#todo return whether success or not
-        this.db.ref(path).set(data);
+    write(path: string, data: Object): Promise<Object> {
+        return Promise.all([
+            this.db.ref(path).set(data),
+            data
+        ])
+        .then(data => {
+            return data[1];
+        });
+    }
+
+    /**
+     * Push object to location under new unique key
+     * @param path location at which to write the data
+     * @param data object to be uploaded
+     * @returns a Promise of the uploaded object that will be resolved when upload completes
+     */
+    push(path: string, data: Object): Promise<Object>{
+        let key = this.getNewKey();
+        console.log(path+key);
+        return this.write(path+key, data).then(data => {
+            return data;
+        });
     }
 
     /**
      * Delete object at location in firebase database
      * @param path location at which to delete the data
+     * @returns a Promise of the object deleted that will be resolved when the delete is successful
      */
-    delete(path: string){
+    delete(path: string): Promise<Object>{
         //#todo return whether success or not
-        this.write(path, {});
+        return Promise.all([
+            this.read(path).then(obj => {
+                this.write(path, {});
+                return obj;
+            })
+        ])
+        .then(data => {
+            return data[0];
+        });
     }
 
     /**
@@ -70,7 +101,6 @@ export default class Spark {
      * @returns promise of array of objects
      */
     readAsArray(path: string): Promise<Object[]> {
-        //#todo handle checking for nonexistent node
         return this.read(path).then(data => {
             return Object.values(data);
 
@@ -81,22 +111,36 @@ export default class Spark {
      * Set a callback function to run when data updates at location
      * @param path location of data to listen to
      * @param callback function to be run when data changes
+     * @returns a Promise of true is subscription is successful
      */
     subscribe(path: string, callback: Function){
-        this.db.ref(path).on('value', snap => {
-            callback(snap.val());
-        });
+        return Promise.all([
+            this.db.ref(path).on('value', snap => {
+                callback(snap.val());
+            }),
+            true
+        ])
+        .then(data => {
+            return data[1];
+        })
     }
 
     /**
      * Subscribes to an array of children of object at location
      * @param path parent of children to listen to
      * @param callback function to be run when data changes
+     * @returns a Promise of true is subscription is successful
      */
     subscribeToArray(path: string, callback: Function){
-        this.db.ref(path).on('value', snap => {
-            callback(Object.values(snap.val()));
-        });
+        return Promise.all([
+            this.db.ref(path).on('value', snap => {
+                callback(Object.values(snap.val()));
+            }),
+            true
+        ])
+        .then(data => {
+            return data[1];
+        })
     }
 
     /**
