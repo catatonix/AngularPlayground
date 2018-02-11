@@ -71,7 +71,6 @@ export default class Spark {
      */
     push(path: string, data: Object): Promise<Object>{
         let key = this.getNewKey();
-        console.log(path+key);
         return this.write(path+key, data).then(data => {
             return data;
         });

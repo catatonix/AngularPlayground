@@ -47,6 +47,7 @@ export default class UserService {
     }
 
     addUser(user: User): Promise<User>{
+        user.id = this.dataStore.users.length + 2;
         return this.spark.push(this.path, user).then(usr => {
             return user;
         });

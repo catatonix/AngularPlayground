@@ -36,6 +36,7 @@ export class NewContactDialogComponent implements OnInit {
   save(){
     this.service.addUser(this.user).then(usr => {
       console.log(usr);
+      this.dialogRef.close(usr); // ensures object is only returned if add was succesful
     });
   }
 

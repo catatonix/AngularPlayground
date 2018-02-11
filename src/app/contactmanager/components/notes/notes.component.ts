@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import Note from '../../models/Note';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ViewChild } from '@angular/core';
@@ -24,9 +24,12 @@ export class NotesComponent  {
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnInit() {
-    this.dataSource = new MatTableDataSource<Note>(this.notes);
-  }
+  ngOnChanges(changes: SimpleChanges) {
+    
+        this.dataSource = new MatTableDataSource<Note>(changes.notes.currentValue);
+        // You can also use categoryId.previousValue and 
+        // categoryId.firstChange for comparing old and new values
+    }
 
   applyFilter(filterValue: string){
     filterValue = filterValue.trim(); // remove whitespace;
