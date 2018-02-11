@@ -38,7 +38,6 @@ export default class UserService {
                 users.push(this.userFactory(user));
             });
             this.dataStore.users = users;
-            console.log(this.dataStore.users);
             this._users.next(this.dataStore.users);
         });
     }

@@ -15,6 +15,7 @@ import Spark from '../data/Spark';
 import UserService from './services/UserService';
 import { HttpClientModule } from '@angular/common/http';
 import { NotesComponent } from './components/notes/notes.component';
+import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 
 const routes: Routes = [
   { path: '', component: ContactmanagerAppComponent,
@@ -34,7 +35,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpClientModule
   ],
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, NotesComponent],
-  providers: [UserService, Spark]
+  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, NotesComponent, NewContactDialogComponent],
+  providers: [UserService, Spark],
+  entryComponents:[
+    NewContactDialogComponent
+  ]
 })
 export class ContactmanagerModule { }

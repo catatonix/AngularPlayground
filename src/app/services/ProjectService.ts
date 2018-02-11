@@ -21,7 +21,6 @@ export default class ProjectService{
         this.ref = this.database.getRef(this.path);
         this.getAllProjects().then(projects => {
             this.cachedProjects = projects;
-            console.log(this.cachedProjects);            
         })
     }
 
