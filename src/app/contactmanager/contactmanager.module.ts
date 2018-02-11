@@ -14,6 +14,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import Spark from '../data/Spark';
 import UserService from './services/UserService';
 import { HttpClientModule } from '@angular/common/http';
+import { NotesComponent } from './components/notes/notes.component';
 
 const routes: Routes = [
   { path: '', component: ContactmanagerAppComponent,
@@ -33,7 +34,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpClientModule
   ],
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent],
+  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, NotesComponent],
   providers: [UserService, Spark]
 })
 export class ContactmanagerModule { }

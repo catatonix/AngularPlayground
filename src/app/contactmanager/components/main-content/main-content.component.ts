@@ -23,7 +23,6 @@ export class MainContentComponent implements OnInit {
       let id = params['id'];
       if (!id) id = 1;
       this.user = this.service.userById(id);
-
       this.service.users.subscribe(users => {
         if (users.length == 0) return;
         this.user = this.service.userById(id);

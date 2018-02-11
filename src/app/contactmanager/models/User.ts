@@ -4,7 +4,7 @@ export default class User{
     id: number;
     birthDate: Date;
     name: string;
-    avater: string;
+    avatar: string;
     bio: string;
     notes: Note[];
 }
